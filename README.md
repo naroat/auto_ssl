@@ -1,39 +1,15 @@
-## 自认证ssl脚本使用
+[TOC]
 
-### 脚本存放服务器
-```
-ssh root@120.77.201.214
-Hanzikeji456
-```
+### 功能
 
-### 脚本目录
+该脚本使用certbot生成证书分发到指定服务器, 实现一台机器管理证书, 只需要设置一下配置文件;
 
-```
-/disk2/soft/AutoSSL
-```
-
-### 目录结构
-```
-/disk2/soft/AutoSSL/conf.d/:         配置文件目录; 示例配置文件: *.example.com.conf
-/disk2/soft/AutoSSL/auto_ssl.sh:     脚本文件, 需要一个参数; 传配置文件名称
-/disk2/soft/AutoSSL/certbot-letencrypt-wildcardcertificates-alydns-au: 第三方插件, 用来设置和修改dns解析记录;
-```
-
-### 使用示例
-
-```
-# 1: 进入脚本目录
-cd /disk2/soft/AutoSSL  
-# 2: 使用前创建配置文件,并填写配置信息
-vim  ./conf.d/*.example.com.conf
-# 3: 执行脚本, 只用传递配置名称
-./auto_ssl.sh *.example.com.conf    
-```
-
-### 注: 第三方插件中au.sh原本只能接受三个参数, 为了适应自身的脚本, 这里做了点修改如下:
+### 该脚本需要用到第三方插件修改dns记录值 
 
 > 第三方插件地址: https://github.com/ywdblog/certbot-letencrypt-wildcardcertificates-alydns-au
 
+> 第三方插件中au.sh原本只能接受三个参数, 为了适应自身的脚本, 这里做了点修改如下:
+>
 ```
 #如何申请见https://help.aliyun.com/knowledge_detail/38738.html
 ALY_KEY=$4
@@ -54,3 +30,20 @@ HWY_TOKEN=$5
 GODADDY_KEY=$4
 GODADDY_TOKEN=$5
 ```
+
+### 目录结构
+```
+conf.d/:         配置文件目录; 示例配置文件: *.example.com.conf
+auto_ssl.sh:     脚本文件, 需要一个参数; 传配置文件名称
+```
+
+### 使用示例
+
+```
+# 1: 使用前拷贝配置模板例子, 将其中的参数换成自己的即可
+cp  ./conf.d/*.example.com.conf ./conf.d/*.example.com.conf
+# 2: 执行脚本, 只用传递配置名称
+./auto_ssl.sh *.example.com.conf    
+```
+
+
