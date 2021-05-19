@@ -7,7 +7,8 @@ fi
 
 ###### 读取配置 ######
 # 配置文件完整路径
-CONF_FILE="$(pwd)/conf.d/$1"
+#CONF_FILE="$(pwd)/conf.d/$1"
+CONF_FILE="$1"
 
 # 读取配置文件
 . ${CONF_FILE}
