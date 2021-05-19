@@ -27,9 +27,16 @@ elif [[ $DNS_TYPE=="txy" ]]; then
   token=$TXY_TOKEN
 fi
 
+# 组合参数
+DOMAIN_NAME_D=""
+for domain_name in ${DOMAIN_NAMES[@]}
+do
+  DOMAIN_NAME_D+=" -d ${domain_name}"
+done
+#echo -e ${DOMAIN_NAME_D}
+
 ###### 生成证书 ######
-certbot certonly \
--d ${DOMAIN_NAME} \
+certbot certonly ${DOMAIN_NAME_D} \
 --manual \
 --preferred-challenges dns \
 --manual-auth-hook "${AU_SH_PATH} ${SCRIPT_ENV} ${DNS_TYPE} add ${key} ${token}" \
