@@ -6,7 +6,7 @@ $dir = dirname(dirname(__FILE__));
 $domainfile = $dir . DIRECTORY_SEPARATOR . "domain.ini";
 
 /*
-  $obj = new AliDns("", "", "simplehttps.com1");
+  $obj = new AliDns("", "", ""); //key, token, domain
   $data = $obj->DescribeDomainRecords();
   if ($data["httpcode"]!=200) {
   echo "aly dns 域名获取失败-" . $data["Code"] . ":" . $data["Message"];
