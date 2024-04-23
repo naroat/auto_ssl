@@ -10,7 +10,7 @@
 
 ### 目录结构
 ```
-certbot-letencrypt-wildcardcertificates-alydns-au/: 修改并集成的第三方库，功能是添加dns记录
+dns-au/: 修改并集成的第三方库，功能是添加dns记录
 conf.d/:         配置文件目录; 示例配置文件: *.example.com.conf
 auto_ssl.sh:     脚本文件, 需要一个参数; 传配置文件名称
 ```
