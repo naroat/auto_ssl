@@ -35,7 +35,7 @@ $domainfile = $dir . DIRECTORY_SEPARATOR . "domain.ini";
  */
 
 ###### 代码运行
-//php txydns.php add "www.yudadan.com" "k1" "v1"  AKIDwlPr7DUpLgpZBb4tlT0MWUHtIVXOJwxm mMkxzoTxOirrfJlFYfbS7g7792jEi5GG
+//php txydns.php add "www.yudadan.com" "k1" "v1"  '' ''
 # 第一个参数是 action，代表 (add/clean) 
 # 第二个参数是域名 
 # 第三个参数是主机名（第三个参数+第二个参数组合起来就是要添加的 TXT 记录）
