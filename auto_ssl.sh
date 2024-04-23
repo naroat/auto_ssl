@@ -14,7 +14,7 @@ CONF_FILE="$1"
 . ${CONF_FILE}
 
 # 脚本路径(第三方插件的脚本路径)
-AU_SH_PATH='/disk2/soft/certbot-letencrypt-wildcardcertificates-alydns-au/au.sh'
+AU_SH_PATH='./dns-au/au.sh'
 
 # dns: key and token
 key=""
