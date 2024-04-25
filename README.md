@@ -21,11 +21,26 @@ auto_ssl.sh:     脚本文件, 需要一个参数; 传配置文件名称
 
 ### 使用示例
 
+命令：
+
 ```
 # 1: 使用前拷贝配置模板例子, 将其中的参数换成自己的即可
-cp  ./conf.d/*.example.com.conf ./conf.d/*.example.com.conf
+cp  ./conf.d/*.example.com.conf ./conf.d/[你的域名].conf
 # 2: 执行脚本, 只用传递配置名称
-./auto_ssl.sh *.example.com.conf    
+./auto_ssl.sh ./conf.d/[你的域名].conf   
+```
+
+生成的证书目录:
+
+> /etc/letsencrypt/live/[域名]
+
+里面包含的证书内容：
+
+```
+cert.pem: 服务端证书
+chain.pem: 浏览器需要的所有证书但不包括服务端证书，比如根证书和中间证书
+fullchain.pem: 包括了cert.pem和chain.pem的内容; nginx中ssl_certificate使用这个
+privkey.pem: 证书的私钥； nginx中ssl_certificate_key使用这个
 ```
 
 
