@@ -9,18 +9,18 @@ class AlyDns extends AbstractDns
 	private $DomainName   = null;
 	private $recordValue = '';
 
-	public function __construct($accessKeyId, $accessSecrec, $domain, $recordValue = '')
+	public function __construct($accessKeyId, $accessSecrec, $recordValue = '')
 	{
 		$this->accessKeyId  = $accessKeyId;
 		$this->accessSecrec = $accessSecrec;
-		$this->DomainName   = $domain;
 		$this->recordValue = $recordValue;
 	}
 
-	public function handle($action, $hostname)
+	public function handle($action, $domain, $hostname)
     {
-        $domainarray = self::getDomain($this->DomainName);
+        $domainarray = self::getDomain($domain);
         $selfdomain  = ($domainarray[0] == "") ? $hostname : $hostname.".".$domainarray[0];
+        $this->DomainName = $domainarray[1];
 
         switch ($action) {
             case "clean":

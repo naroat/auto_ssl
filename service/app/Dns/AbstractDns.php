@@ -12,8 +12,13 @@ abstract class AbstractDns
     public static function getDomain($domain)
     {
         //https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains
-        $arr = self::config('domain_suffix');
-
+        $tmp = self::config('domain_suffix');
+        $arr = array();
+        foreach ($tmp as $k=>$v) {
+            $v = trim($v);
+            if ($v!="")
+                $arr[]= "." . $v;
+        }
         //二级域名
         $seconddomain = "";
         //子域名
