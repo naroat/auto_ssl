@@ -1,20 +1,19 @@
 #!/bin/bash
-###### 参数验证 ######
+###### param check ######
 if [[ ! -n $1 ]]; then
-  echo "参数错误: 需要指定一个配置文件!"
+  echo "param error: please specify a configuration file!"
   exit
 fi
 
-###### 读取配置 ######
-# 配置文件完整路径
+###### read configuration ######
 #CONF_FILE="$(pwd)/conf.d/$1"
 CONF_FILE="$1"
 
-# 读取配置文件
+# read
 . ${CONF_FILE}
 
-# 脚本路径(第三方插件的脚本路径)
-AU_SH_PATH='./dns-au/au.sh'
+# auto_dns.sh path
+AU_SH_PATH='./auto_dns.sh'
 
 # dns: key and token
 key=""
@@ -27,7 +26,7 @@ elif [[ $DNS_TYPE=="txy" ]]; then
   token=$TXY_TOKEN
 fi
 
-# 组合参数
+# build param
 DOMAIN_NAME_D=""
 for domain_name in ${DOMAIN_NAMES[@]}
 do
@@ -35,10 +34,10 @@ do
 done
 #echo -e ${DOMAIN_NAME_D}
 
-###### 生成证书 ######
+###### gen cert ######
 certbot certonly ${DOMAIN_NAME_D} \
 --manual \
 --preferred-challenges dns \
---manual-auth-hook "${AU_SH_PATH} ${SCRIPT_ENV} ${DNS_TYPE} add ${key} ${token}" \
---manual-cleanup-hook "${AU_SH_PATH} ${SCRIPT_ENV} ${DNS_TYPE} clean ${key} ${token}" \
+--manual-auth-hook "${AU_SH_PATH} ${DNS_TYPE} add ${key} ${token}" \
+--manual-cleanup-hook "${AU_SH_PATH} ${DNS_TYPE} clean ${key} ${token}" \
 --post-hook "${POST_HOOK}"

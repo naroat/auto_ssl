@@ -1,0 +1,15 @@
+{
+    "name": "auto_ssl/service",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "taoran",
+            "email": "taoran0796@163.com"
+        }
+    ],
+    "require": {}
+}
