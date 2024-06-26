@@ -5,11 +5,11 @@
 # argv 3: domain
 # argv 4: hostname
 # argv 5: TXT value
-# argv 6: APPKEY
-# argv 7: APPTOKEN
+# argv 6: keyid
+# argv 7: token
 
 ######## example:
-# php auto_dns.php aly add  "simplehttps.com" "hostname" "record value"  APPKEY APPTOKEN
+# php auto_dns.php aly add  "simplehttps.com" "hostname" "record value"  keyid token
 
 try {
     if (count($argv) < 7) {
