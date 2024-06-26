@@ -16,15 +16,8 @@ CONF_FILE="$1"
 AU_SH_PATH='./auto_dns.sh'
 
 # dns: key and token
-key=""
-token=""
-if [[ $DNS_TYPE=="aly" ]]; then
-  key=$ALY_KEY
-  token=$ALY_TOKEN
-elif [[ $DNS_TYPE=="txy" ]]; then
-  key=$TXY_KEY
-  token=$TXY_TOKEN
-fi
+key=$KEYID
+token=$TOEKN
 
 # build param
 DOMAIN_NAME_D=""

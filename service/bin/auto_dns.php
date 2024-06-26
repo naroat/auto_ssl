@@ -1,15 +1,15 @@
 <?php
 ########
 # argv 1: domain provider
-# argv 2: action，enum (add/clean)
+# argv 2: action; enum (add/clean)
 # argv 3: domain
 # argv 4: hostname
-# argv 5: TXT record
+# argv 5: TXT value
 # argv 6: APPKEY
 # argv 7: APPTOKEN
 
 ######## example:
-# php auto_dns.php aly add  "simplehttps.com" "host record" "record value"  APPKEY APPTOKEN
+# php auto_dns.php aly add  "simplehttps.com" "hostname" "record value"  APPKEY APPTOKEN
 
 try {
     if (count($argv) < 7) {

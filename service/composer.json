@@ -11,5 +11,7 @@
             "email": "taoran0796@163.com"
         }
     ],
-    "require": {}
+    "require": {
+        "hyperf/nano": "^2.0"
+    }
 }

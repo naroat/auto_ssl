@@ -8,7 +8,7 @@ class GodaddyDns extends AbstractDns
     private $DomainName   = null;
     private $recordValue = '';
 
-    public function __construct($accessKeyId, $accessSecrec, $recordValue = '_acme-challenge')
+    public function __construct($accessKeyId, $accessSecrec, $recordValue = '')
     {
         $this->accessKeyId  = $accessKeyId;
         $this->accessSecrec = $accessSecrec;
@@ -23,7 +23,7 @@ class GodaddyDns extends AbstractDns
 
         switch ($action) {
             case "clean":
-                //api 不包含该操作
+                //api
                 break;
 
             case "add":
@@ -38,17 +38,10 @@ class GodaddyDns extends AbstractDns
                 //}
                 if ($data["httpCode"] != 200) {
                     $message = json_decode($data["result"], true);
-                    echo "域名处理失败-".$message["message"];
-                    exit;
+                    throw new \Exception('error' . $message["message"]);
                 }
                 break;
         }
-    }
-
-    public function error($code, $str)
-    {
-        echo "操作错误:".$code.":".$str;
-        exit;
     }
 
     private function curl($url, $header = '', $data = '', $method = 'get')
@@ -66,11 +59,6 @@ class GodaddyDns extends AbstractDns
             'result' => $result,
             'httpCode' => $httpCode
         );
-    }
-
-    private function out($msg)
-    {
-        return json_decode($msg, true);
     }
 
     public function getDomains()

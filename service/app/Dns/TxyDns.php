@@ -13,7 +13,7 @@ class TxyDns extends AbstractDns
     private $Path = "/v2/index.php";
 
 
-    public function __construct($accessKeyId, $accessSecrec, $recordValue = '_acme-challenge') {
+    public function __construct($accessKeyId, $accessSecrec, $recordValue = '') {
         $this->accessKeyId = $accessKeyId;
         $this->accessSecrec = $accessSecrec;
         $this->recordValue = $recordValue;
@@ -29,8 +29,7 @@ class TxyDns extends AbstractDns
             case "clean":
                 $data = $this->RecordList($selfdomain, "TXT");
                 if ($data["code"] != 0) {
-                    echo "txy dns 记录获取失败-" . $data["message"] . "\n";
-                    exit;
+                    throw new \Exception('txy dns get: ' . $data["message"]);
                 }
                 $records = $data["data"]["records"];
                 foreach ($records as $k => $v) {
@@ -38,28 +37,17 @@ class TxyDns extends AbstractDns
                     $data = $this->RecordDelete($v["id"]);
 
                     if ($data["code"] != 0) {
-                        echo "txy dns 记录删除失败-" . $data["message"] . "\n";
-                        exit;
+                        throw new \Exception('txy dns delete: ' . $data["message"]);
                     }
                 }
-
                 break;
-
             case "add":
                 $data = $this->RecordCreate($selfdomain, "TXT", $this->recordValue);
                 if ($data["code"] != 0) {
-                    echo "txy dns 记录添加失败-" . $data["message"] . "\n";
-                    exit;
+                    throw new \Exception('txy dns add: ' . $data["message"]);
                 }
                 break;
         }
-
-        echo "域名 API 调用成功结束\n";
-    }
-
-    public function error($code, $str) {
-        echo "操作错误:" . $code . ":" . $str;
-        exit;
     }
 
     public function RecordDelete($recordId) {
@@ -122,10 +110,10 @@ class TxyDns extends AbstractDns
     private function formatRequestData($action, $request, $reqMethod) {
         $param = $request;
         $param["Action"] = ucfirst($action);
-//$param["RequestClient"] = $this->sdkVersion;
+        //$param["RequestClient"] = $this->sdkVersion;
         $param["Nonce"] = rand();
         $param["Timestamp"] = time();
-//$param["Version"] = $this->apiVersion;
+        //$param["Version"] = $this->apiVersion;
 
         $param["SecretId"] = $this->accessKeyId;
 
@@ -134,7 +122,7 @@ class TxyDns extends AbstractDns
         return $param;
     }
 
-//签名
+    //sign
     private function formatSignString($host, $path, $param, $requestMethod) {
         $tmpParam = array();
         ksort($param);
