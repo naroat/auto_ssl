@@ -32,15 +32,15 @@ cp  ./conf.d/*.example.com.conf ./conf.d/[你的域名].conf
 
 生成的证书目录:
 
-> /etc/letsencrypt/live/[域名]
+> /etc/letsencrypt/archive/[域名]
 
 里面包含的证书内容：
 
 ```
-cert.pem: 服务端证书
-chain.pem: 浏览器需要的所有证书但不包括服务端证书，比如根证书和中间证书
-fullchain.pem: 包括了cert.pem和chain.pem的内容; nginx中ssl_certificate使用这个
-privkey.pem: 证书的私钥； nginx中ssl_certificate_key使用这个
+cert1.pem: 服务端证书
+chain1.pem: 浏览器需要的所有证书但不包括服务端证书，比如根证书和中间证书
+fullchain1.pem: 包括了cert.pem和chain.pem的内容; nginx中ssl_certificate使用这个
+privkey1.pem: 证书的私钥； nginx中ssl_certificate_key使用这个
 ```
 
 
