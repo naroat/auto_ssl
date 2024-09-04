@@ -30,6 +30,26 @@ cp  ./conf.d/*.example.com.conf ./conf.d/[你的域名].conf
 ./auto_ssl.sh ./conf.d/[你的域名].conf   
 ```
 
+自定义配置
+```conf
+###### 配置 ######
+# 脚本环境(php,python)
+SCRIPT_ENV="php"
+# 域名: 以下配置申请泛域名和根域名ssl证书
+DOMAIN_NAMES=("*.example.wang example.wang")
+# dns类型(aly or txy)
+DNS_TYPE="aly"
+# 阿里dns
+ALY_KEY=''
+ALY_TOKEN=''
+# 腾讯dns
+TXY_KEY=""
+TXY_TOKEN=""
+# 后置钩子, 可以在申请后执行一些命令(如: 在此移动证书文件到指定目录, 重启nginx等)
+#POST_HOOK="docker restart openresty"
+```
+
+
 生成的证书目录:
 
 > /etc/letsencrypt/archive/[域名]
